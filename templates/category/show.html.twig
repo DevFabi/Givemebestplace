@@ -1,0 +1,9 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+{% for activity in activities %}
+    {{ activity.title }}
+{% endfor %}
+
+{% endblock %}

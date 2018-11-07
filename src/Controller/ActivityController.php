@@ -3,6 +3,7 @@ namespace App\Controller;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
 use App\Repository\ActivityRepository;
+use App\Repository\CategoryRepository;
 use App\Entity\Activity;
 use App\Entity\Category;
 use App\Form\CommentType;
@@ -16,11 +17,13 @@ class ActivityController extends AbstractController
      /**
      * @Route("/", name="home")
      */
-    public function home(ActivityRepository $repo)
+    public function home(ActivityRepository $repo, CategoryRepository $repoCat)
     {
         $activities = $repo->findAll();
+        $categories = $repoCat->findAll();
         return $this->render('home.html.twig', [
-            'activities' => $activities
+            'activities' => $activities,
+            'categories' => $categories
         ]);
     }
 

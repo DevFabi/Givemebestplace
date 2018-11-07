@@ -4,6 +4,15 @@
 
 <div class="container">
     <div class="row">
+        {% for category in categories %}
+        <div class="col-md-2"></div>
+        <a href="{{path ('show_category', {'id' : category.id })}}">{{ category.title }}</a>
+        <p>{{ category.description }}</p>
+        </div>
+        {% endfor %}
+      </div>
+   </div>
+    <div class="row">
             {% for activity in activities %}
             <div class="col-md-4">              
           <h3> <a href="{{path ('show_activity', {'id' : activity.id })}}">{{ activity.title }}</a> </h3> 
