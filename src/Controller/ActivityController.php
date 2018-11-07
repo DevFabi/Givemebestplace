@@ -4,7 +4,9 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
 use App\Repository\ActivityRepository;
 use App\Entity\Activity;
+use App\Entity\Category;
 use App\Form\CommentType;
+use App\Form\ActivityType;
 use App\Entity\Comment;
 use Symfony\Component\HttpFoundation\Request;
 use Doctrine\Common\Persistence\ObjectManager;
@@ -43,6 +45,29 @@ class ActivityController extends AbstractController
 
         return $this->render('activity/show.html.twig', [
             'formComment' => $form->createView(),
+            'activity' => $activity
+        ]);
+    }
+
+    /**
+     * @Route("/create_activity", name="create_activity")
+     */
+    public function create_activity(Request $request, ObjectManager $manager){
+
+        $activity = new Activity();
+        $form = $this->createForm(ActivityType::class, $activity);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+          // $activity->setCreatedAt(new \DateTime());
+           $manager->persist($activity);
+           $manager->flush();
+
+        return $this->redirectToRoute('show_activity', ['id' => $activity->getId()]);
+        }
+
+        return $this->render('activity/create_activity.html.twig', [
+            'formActivity' => $form->createView(),
             'activity' => $activity
         ]);
     }

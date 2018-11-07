@@ -3,6 +3,7 @@
 namespace App\Form;
 
 use App\Entity\Activity;
+use App\Entity\Category;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -16,7 +17,10 @@ class ActivityType extends AbstractType
             ->add('title')
             ->add('description')
             ->add('note')
-            ->add('category')
+            ->add('category', EntityType::class,[
+                'class' => Category::class,
+                'choice_label' => 'title'
+            ])
             ->add('save', SubmitType::class)
         ;
     }
