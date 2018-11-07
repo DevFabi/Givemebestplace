@@ -1,0 +1,40 @@
+{% extends 'base.html.twig' %}
+
+ {% block body %}
+ <div class="container">
+     <div class="row">
+         <div class="col-md-1"></div>
+         <div class="col-md-10">
+                <h3>{{activity.title}}</h3>
+                {{ activity.category.title}}
+                <p>{{activity.description}}</p>
+         </div>
+         <div class="col-md-1"></div>
+     </div>
+   <div class="row">
+        <div class="col-md-3"></div>
+        <div class="col-md-6">
+            <a href="{{path ('create_comment', {'id' : activity.id })}}">Ajouter un commentaire</a>
+            {% include 'comment/create_comment.html.twig' %}
+        </div>
+        <div class="col-md-3"></div>
+    </div>
+<br>
+        <div class="row">
+                <div class="col-md-3"></div>
+                <div class="col-md-6">
+                    <p> {% for comment in activity.comments %}
+                            <p> {{comment.author}} </p>
+                            <p> {{ comment.msg }} </p>
+                            <hr>
+                    {% endfor %} </p>
+                </div>
+                <div class="col-md-3"></div>
+        </div>
+
+   
+   
+
+</div>
+ {% endblock %}
+ 
