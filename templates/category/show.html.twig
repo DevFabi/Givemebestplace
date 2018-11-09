@@ -3,7 +3,16 @@
 {% block body %}
 
 {% for activity in activities %}
-    {{ activity.title }}
+<div class="row">
+        <div class="col-md-1"></div>
+        <div class="col-md-10">
+               <h3> <a href="{{path ('show_activity', {'id' : activity.id })}}">{{ activity.title }}</a> </h3>
+               {{ activity.category.title}}
+               <p>{{activity.description}}</p>
+        </div>
+        <div class="col-md-1"></div>
+    </div>
+
 {% endfor %}
 
 {% endblock %}

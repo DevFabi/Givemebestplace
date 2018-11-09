@@ -5,7 +5,7 @@
 <div class="container">
     <div class="row">
         {% for category in categories %}
-        <div class="col-md-2"></div>
+        <div class="col-md-2">
         <a href="{{path ('show_category', {'id' : category.id })}}">{{ category.title }}</a>
         <p>{{ category.description }}</p>
         </div>
