@@ -101,3 +101,20 @@ body {
     margin: auto;
     position: relative;
 }
+.activity-title{
+    color:black
+}
+.activity-title:hover{
+    color:black;
+    text-decoration: none;
+}
+.bloc-utilisateur{
+    background: #ffdcbb;
+    border: 1px solid #ffbc7d;
+    box-shadow: 3px 3px 0px #ffbc7d;
+}
+.bloc-gauche{
+    background: #e2ecff;
+    border: 1px solid #7daaff;
+    box-shadow: 3px 3px 3px #7daaff;
+}
