@@ -25,7 +25,9 @@ class AppFixtures extends Fixture
             $activity->setTitle($faker->sentence($nbWords = 4, $variableNbWords = true))
                     ->setDescription($faker->paragraph())
                     ->setNote($faker->numberBetween($min = 1, $max = 5))
-                    ->setCategory($category);
+                    ->setCategory($category)
+                    ->setCreatedAt(new \DateTime())
+                    ->setDeleted(0);
                     $manager->persist($activity);
                     for ($k=1; $k <= mt_rand(4,10) ; $k++) { 
                         $comment = new Comment();
@@ -33,7 +35,9 @@ class AppFixtures extends Fixture
                                 ->setSite($faker->url)
                                 ->setMsg($faker->paragraph())
                                 ->setNote($faker->numberBetween($min = 1, $max = 5))
-                                ->setActivity($activity);
+                                ->setActivity($activity)
+                                ->setCreatedAt(new \DateTime())
+                                ->setDeleted(0);
                                 $manager->persist($comment);
                         }
                 }

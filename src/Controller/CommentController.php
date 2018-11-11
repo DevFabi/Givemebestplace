@@ -27,7 +27,8 @@ class CommentController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
            $comment->setActivity($activity);
-          // $comment->setCreatedAt(new \DateTime());
+           $comment->setCreatedAt(new \DateTime());
+           $comment->setDeleted(0);
            $manager->persist($comment);
            $manager->flush();
 

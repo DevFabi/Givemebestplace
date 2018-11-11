@@ -6,9 +6,12 @@
 <div class="row">
         <div class="col-md-1"></div>
         <div class="col-md-10">
-               <h3> <a href="{{path ('show_activity', {'id' : activity.id })}}">{{ activity.title }}</a> </h3>
+                <div class="fond-article">
+               <h3> <a class="activity-title" href="{{path ('show_activity', {'id' : activity.id })}}">{{ activity.title }}</a> </h3>
                {{ activity.category.title}}
                <p>{{activity.description}}</p>
+               </div>
+               <br>
         </div>
         <div class="col-md-1"></div>
     </div>

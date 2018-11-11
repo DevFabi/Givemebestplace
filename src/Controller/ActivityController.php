@@ -39,7 +39,8 @@ class ActivityController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
            $comment->setActivity($activity);
-          // $comment->setCreatedAt(new \DateTime());
+           $comment->setCreatedAt(new \DateTime());
+           $comment->setDeleted(0);
            $manager->persist($comment);
            $manager->flush();
 
@@ -62,7 +63,8 @@ class ActivityController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-          // $activity->setCreatedAt(new \DateTime());
+           $activity->setCreatedAt(new \DateTime());
+           $activity->setDeleted(0);
            $manager->persist($activity);
            $manager->flush();
 

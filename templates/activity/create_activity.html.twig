@@ -1,8 +1,25 @@
 {% extends 'base.html.twig' %}
 
+{% form_theme formActivity 'bootstrap_4_layout.html.twig' %}
+
 {% block body %}
 
-    {{ form(formActivity)}}
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-3"></div>
+        <div class="col-6"> {{ form_start(formActivity)}}
+                {{ form_row(formActivity.title, { 'label': 'Titre de l\'activité' }) }}
+                {{ form_row(formActivity.description, { 'label': 'Description' })  }}
+                {{ form_row(formActivity.note, { 'label': 'Note', 'attr': {'class': 'foo'} } )  }}
+                {{ form_row(formActivity.category, { 'label': 'Choisissez une categorie' })  }}
+                {{ form_end(formActivity)}}
+        </div>
+        <div class="col-2"></div>
+
+    </div>
+</div>
+
+   
 
 {% endblock %}
    
