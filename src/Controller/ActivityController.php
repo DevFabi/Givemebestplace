@@ -15,15 +15,31 @@ use Symfony\Component\HttpFoundation\Request;
 use Doctrine\Common\Persistence\ObjectManager;
 use App\Repository\CommentRepository;
 use Symfony\Component\HttpFoundation\File\Exception\FileException;
-class ActivityController extends AbstractController
+use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+
+class ActivityController extends Controller
 {
      /**
      * @Route("/", name="home")
      */
-    public function home(ActivityRepository $repo, CategoryRepository $repoCat)
+    public function home(ActivityRepository $repo, CategoryRepository $repoCat,Request $request)
     {
-        $activities = $repo->findAll();
+        $allActivities = $repo->findAll();
         $categories = $repoCat->findAll();
+
+        /* @var $paginator \Knp\Component\Pager\Paginator */
+        $paginator  = $this->get('knp_paginator');
+        
+        // Paginate the results of the query
+        $activities = $paginator->paginate(
+            // Doctrine Query, not results
+            $allActivities,
+            // Define the page parameter
+            $request->query->getInt('page', 1),
+            // Items per page
+            5
+        );
+
         return $this->render('home.html.twig', [
             'activities' => $activities,
             'categories' => $categories
@@ -49,10 +65,25 @@ class ActivityController extends AbstractController
 
         return $this->redirectToRoute('show_activity', ['id' => $activity->getId()]);
         }
+        $allComments = $activity->getComments();
+         /* @var $paginator \Knp\Component\Pager\Paginator */
+         $paginator  = $this->get('knp_paginator');
+        
+         // Paginate the results of the query
+         $comments = $paginator->paginate(
+             // Doctrine Query, not results
+             $allComments,
+             // Define the page parameter
+             $request->query->getInt('page', 1),
+             // Items per page
+             5
+         );
+ 
 
         return $this->render('activity/show.html.twig', [
             'formComment' => $form->createView(),
-            'activity' => $activity
+            'activity' => $activity,
+            'comments' => $comments
         ]);
     }
 
@@ -66,15 +97,15 @@ class ActivityController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $pictures = $activity->getPictures();
+            $pictures = $activity->getPictures(); // On récupère toutes les photos ajoutées
             
-            if($pictures){
-                foreach ($pictures as $picture ) {
-                   $file = $picture->getUrl();
-                   $fileName = $this->generateUniqueFileName().'.'.$file->guessExtension();
+            if($pictures){ // S'il y a des photos
+                foreach ($pictures as $picture ) { // Pour chaque photo
+                   $file = $picture->getUrl(); // On récupère l'url uploadé
+                   $fileName = $this->generateUniqueFileName().'.'.$file->guessExtension(); // On génère un nom de fichier
                    // Move the file to the directory where brochures are stored
                         try {
-                            $file->move(
+                            $file->move( // On l'ajoute dans le répertoire
                                 $this->getParameter('pictures_directory'),
                                 $fileName
                             );

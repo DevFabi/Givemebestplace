@@ -10,7 +10,7 @@
                 <p>{{activity.description}}</p>
 
                 <p> {% for picture in activity.pictures %}
-                        <p> {{picture.url}} </p>
+                        <p> <img src="{{ asset('uploads/pictures/' ~ picture.url) }}" alt="">  </p>
                         <p> {{ picture.legende }} </p>
                         <hr>
                 {% endfor %} </p>
@@ -20,7 +20,7 @@
    <div class="row">
         <div class="col-md-3"></div>
         <div class="col-md-6">
-            <a href="{{path ('create_comment', {'id' : activity.id })}}">Ajouter un commentaire</a>
+           
             {% include 'comment/create_comment.html.twig' %}
         </div>
         <div class="col-md-3"></div>
@@ -29,11 +29,14 @@
         <div class="row">
                 <div class="col-md-3"></div>
                 <div class="col-md-6">
-                    <p> {% for comment in activity.comments %}
-                            <p> {{comment.author}} </p>
+                    <p> {% for comment in comments %}
+                            <p> <b> {{comment.author}} </b> <i>{{comment.createdAt|date('d-m-Y')}}</i></p>
                             <p> {{ comment.msg }} </p>
                             <hr>
                     {% endfor %} </p>
+                    <div class="navigation">
+                            {{ knp_pagination_render(comments) }}
+                        </div>
                 </div>
                 <div class="col-md-3"></div>
         </div>

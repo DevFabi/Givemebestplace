@@ -119,3 +119,26 @@ body {
     border: 1px solid #7daaff;
     box-shadow: 3px 3px 3px #7daaff;
 }
+.add_tag_link{
+    background: #ffdcbb;
+    border: 1px solid #ffbc7d;
+    box-shadow: 3px 3px 0px #ffbc7d;
+    color:black;
+    padding: 4px;
+    margin: 4px;
+}
+.add_tag_link:hover{
+    text-decoration: none;
+    color:black;
+}
+li{
+    list-style-type:none;
+}
+.remove-tag{
+    background: #ff9292;
+    border: 1px solid #ff3640;
+    color:black;
+    border-radius: 3px;
+    padding-bottom: 4px;
+    padding-left: 4px;
+}

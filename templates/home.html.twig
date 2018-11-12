@@ -46,7 +46,11 @@ Top 5 des utilisateurs : <br>
                 </div>
                 <br>
             {% endfor %}
+            <div class="navigation">
+                    {{ knp_pagination_render(activities) }}
+                </div>
         </div>
+
         <div class="col-3">
             <div class="bloc-utilisateur">
                 <p style="text-align:center;">Bonjour,
