@@ -65,11 +65,10 @@ class ActivityController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $data = $form->getData();
+            
             
            $activity->setCreatedAt(new \DateTime());
            $activity->setDeleted(0);
-           print_r($activity->getPictures()); exit;
            $manager->persist($activity);
            $manager->flush();
 

@@ -30,6 +30,7 @@ class ActivityType extends AbstractType
                 'entry_type' => PictureType::class,
                 'entry_options' => array('label' => false),
                 'allow_add' => true,
+                'by_reference' => false,
             ))
             ->add('save', SubmitType::class)
         ;
