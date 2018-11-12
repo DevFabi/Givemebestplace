@@ -8,6 +8,12 @@
                 <h3>{{activity.title}}</h3>
                 {{ activity.category.title}}
                 <p>{{activity.description}}</p>
+
+                <p> {% for picture in activity.pictures %}
+                        <p> {{picture.url}} </p>
+                        <p> {{ picture.legende }} </p>
+                        <hr>
+                {% endfor %} </p>
          </div>
          <div class="col-md-1"></div>
      </div>

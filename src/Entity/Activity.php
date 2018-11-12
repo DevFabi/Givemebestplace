@@ -59,7 +59,7 @@ class Activity
     private $deleted;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Picture", mappedBy="activity")
+     * @ORM\OneToMany(targetEntity="App\Entity\Picture", mappedBy="activity", cascade={"persist"})
      */
     private $pictures;
 

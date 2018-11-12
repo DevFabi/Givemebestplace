@@ -6,8 +6,10 @@ use App\Repository\ActivityRepository;
 use App\Repository\CategoryRepository;
 use App\Entity\Activity;
 use App\Entity\Category;
+use App\Entity\Picture;
 use App\Form\CommentType;
 use App\Form\ActivityType;
+use App\Form\PictureType;
 use App\Entity\Comment;
 use Symfony\Component\HttpFoundation\Request;
 use Doctrine\Common\Persistence\ObjectManager;
@@ -63,8 +65,11 @@ class ActivityController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $data = $form->getData();
+            
            $activity->setCreatedAt(new \DateTime());
            $activity->setDeleted(0);
+           print_r($activity->getPictures()); exit;
            $manager->persist($activity);
            $manager->flush();
 
