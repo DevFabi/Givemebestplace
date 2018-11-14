@@ -45,7 +45,7 @@
     <body>
         {% block body %}{% endblock %}
         {% block javascripts %}
-            <script src="{{ asset('build/app.js') }}"></script>
+        {{ encore_entry_script_tags('app') }}
         {% endblock %}
     </body>
 </html>
