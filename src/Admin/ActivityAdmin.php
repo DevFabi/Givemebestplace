@@ -13,6 +13,7 @@ use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 use App\Form\PictureType;
 use Symfony\Component\Form\Extension\Core\Type\HiddenType;
+use Symfony\Component\Form\Extension\Core\Type\DateType;
 
 class ActivityAdmin extends AbstractAdmin
 {
@@ -21,37 +22,34 @@ class ActivityAdmin extends AbstractAdmin
         $formMapper->add('title', TextType::class)
                    ->add('description')
                    ->add('note')
-                   ->add('createdAt', HiddenType::class, array(
-                    'data' => New \DateTime()
-                ))
-                ->add('deleted', HiddenType::class, array(
-                    'data' => 0
-                ))
+                   ->add('createdAt', DateType::class, array(
+                    'widget' => 'choice',
+                    'data' => New \DateTime()))
+                   ->add('deleted', HiddenType::class, array(
+                    'data' => 0 ))
                    ->add('category', EntityType::class, [
                     'class' => Category::class,
-                    'choice_label' => 'title',
-                ])
-                ->add('pictures', CollectionType::class, [
+                    'choice_label' => 'title'])
+                   ->add('pictures', CollectionType::class, [
                     'entry_type' => PictureType::class,
                     'by_reference' => false, 
                     'allow_add' => true,
                     'allow_delete' => true, 
-                    'prototype' => true
-                ])
-
-               ;
+                    'prototype' => true]);
     }
 
     protected function configureDatagridFilters(DatagridMapper $datagridMapper)
     {
         $datagridMapper->add('title')
+                       ->add('category.title')
                        ->add('description')
                        ->add('note');
     }
 
     protected function configureListFields(ListMapper $listMapper)
     {
-        $listMapper->addIdentifier('title');
+        $listMapper->addIdentifier('title')
+                     ->add('category.title');
     }
 
     public function toString($object)

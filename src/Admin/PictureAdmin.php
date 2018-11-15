@@ -15,9 +15,7 @@ class PictureAdmin extends AbstractAdmin
     {
         $formMapper->add('url', TextType::class)
                    ->add('legende')
-                   ->add('createdAt', HiddenType::class, array(
-                    'data' => New \DateTime()
-                ));
+                   ;
     }
 
     protected function configureDatagridFilters(DatagridMapper $datagridMapper)
