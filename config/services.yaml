@@ -38,3 +38,10 @@ services:
             - { name: sonata.admin, manager_type: orm, label: Category }
         public: true
 
+    admin.activity:
+        class: App\Admin\ActivityAdmin
+        arguments: [~, App\Entity\Activity, ~]
+        tags:
+            - { name: sonata.admin, manager_type: orm, label: Activity }
+        public: true
+
