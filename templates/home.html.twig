@@ -36,29 +36,23 @@
             </div>
             <div class="col-6">
                 {% for activity in activities %}
-                    <div class="fond-article">
-                        <h3>
-                            <a class="activity-title" href="{{path ('show_activity', {'id' : activity.id })}}">{{ activity.title }}</a>
-                        </h3>
-                        {% for picture in activity.pictures %}
-                        {% if loop.index0 == 0 %}
-                        <img style="height: 40%; width:40%" src="{{ asset('uploads/pictures/' ~ picture.url) }}" alt="{{picture.legende}}">
-                                   
-                        {% endif %}
-                                        
-                                {% endfor %}
-                            
-                        <p>
-                            {{ activity.description }}</p>
-                        <p>
-                            Note :
-                            {{ activity.note }}</p>
-                        <p>Dans la catégorie
-                            {{ activity.category.title }}</p>
-                        </div>
-                    
-                    <br>
-                {% endfor %}
+                 <div class="card">
+                  {% for picture in activity.pictures %}
+                  {% if loop.index0 == 0 %}
+                   <img class="card-img-top" src="{{ asset('uploads/pictures/' ~ picture.url) }}" alt="{{picture.legende}}">
+                  {% endif %}
+                  {% endfor %}
+                   <div class="card-body">
+                     <h5 class="card-title"> <a class="activity-title" href="{{path ('show_activity', {'id' : activity.id })}}">{{ activity.title }}</a></h5>
+                     <p class="card-text"> {{ activity.description }}</p>
+                   </div>
+                   <div class="card-footer">
+                     <small class="text-muted"> {{ activity.createdAt|date('d-m-Y') }} Dans la catégorie
+                                           {{ activity.category.title }}</small>
+                   </div>
+                 </div>
+               {% endfor %}
+               </div>
             </div>
                
            
