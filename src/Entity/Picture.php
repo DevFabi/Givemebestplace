@@ -19,7 +19,7 @@ class Picture
 
     /**
      * @ORM\Column(type="string")
-     * @Assert\NotBlank(message="Please, upload the product brochure as a PDF file.")
+     * @Assert\NotBlank(message="Please, upload the product brochure as a PNG, GIF, JPEG or JPG file.")
      * @Assert\File(mimeTypes = {"image/png","image/jpeg","image/jpg","image/gif"})
      */
     private $url;

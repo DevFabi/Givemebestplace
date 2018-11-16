@@ -8,61 +8,76 @@
             <div class="col-6">
                 {% for category in categories %}
 
-                    <a class="nav-item" href="{{path ('show_category', {'id' : category.id })}}" >{{ category.title }}</a>
+                    <a class="nav-item" href="{{path ('show_category', {'id' : category.id })}}">{{ category.title }}</a>
 
                 {% endfor %}
             </div>
         </div>
-    
 
-    <div class="row">
+        <div class="row">
 
-        <div class="col-3">
-            <div class="bloc-gauche">
-              <p style="text-align:center;"><br>
-Top 5 des utilisateurs : <br>
-1. zrr zj <br>
-2. sqjd fe <br>
-3. kdhks <br>
-4. ajerh <br>
-5. ksdjoisj
-              </p>
-              
-            </div>
-        </div>
-        <div class="col-6">
-            {% for activity in activities %}
-                <div class="fond-article">
-                    <h3>
-                        <a class="activity-title" href="{{path ('show_activity', {'id' : activity.id })}}">{{ activity.title }}</a>
-                    </h3>
-                    <p>
-                        {{ activity.description }}</p>
-                    <p>
-                        Note :
-                        {{ activity.note }}</p>
-                    <p>Dans la catégorie
-                        {{ activity.category.title }}</p> 
+            <div class="col-3">
+                <div class="bloc-gauche">
+                    <p style="text-align:center;"><br>
+                        Top 5 des utilisateurs :
+                        <br>
+                        1. zrr zj
+                        <br>
+                        2. sqjd fe
+                        <br>
+                        3. kdhks
+                        <br>
+                        4. ajerh
+                        <br>
+                        5. ksdjoisj
+                    </p>
+
                 </div>
-                <br>
-            {% endfor %}
-            <div class="navigation">
-                    {{ knp_pagination_render(activities) }}
-                </div>
-        </div>
-
-        <div class="col-3">
-            <div class="bloc-utilisateur">
-                <p style="text-align:center;">Bonjour,
-                    <span style="font-weight:bold;font-size:20px;text-align:center;">
-                        Utilisateur</span>
-                    !</p>
-                <br><br><br><br>
             </div>
+            <div class="col-6">
+                {% for activity in activities %}
+                    <div class="fond-article">
+                        <h3>
+                            <a class="activity-title" href="{{path ('show_activity', {'id' : activity.id })}}">{{ activity.title }}</a>
+                        </h3>
+                        {% for picture in activity.pictures %}
+                        {% if loop.index0 == 0 %}
+                        <img style="height: 40%; width:40%" src="{{ asset('uploads/pictures/' ~ picture.url) }}" alt="{{picture.legende}}">
+                                   
+                        {% endif %}
+                                        
+                                {% endfor %}
+                            
+                        <p>
+                            {{ activity.description }}</p>
+                        <p>
+                            Note :
+                            {{ activity.note }}</p>
+                        <p>Dans la catégorie
+                            {{ activity.category.title }}</p>
+                        </div>
+                    
+                    <br>
+                {% endfor %}
+            </div>
+               
+           
+
+            <div class="col-3">
+                <div class="bloc-utilisateur">
+                    <p style="text-align:center;">Bonjour,
+                        <span style="font-weight:bold;font-size:20px;text-align:center;">
+                            Utilisateur</span>
+                        !</p>
+                    <br><br><br><br>
+                </div>
+            </div>
+
+        </div>
+        <div class="navigation">
+            {{ knp_pagination_render(activities) }}
         </div>
 
     </div>
-
-</div>
 
 {% endblock %}

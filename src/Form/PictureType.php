@@ -15,8 +15,7 @@ class PictureType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('url', FileType::class, array('label' => 'Image (JPG, JPEG, PNG, GIF)',
-            'data_class' => null))
+            ->add('url', FileType::class, array('label' => 'Image (JPG, JPEG, PNG, GIF)'))
             ->add('legende')
             ->add('createdAt', DateType::class, array(
                 'widget' => 'choice',
