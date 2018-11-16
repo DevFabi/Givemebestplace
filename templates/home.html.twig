@@ -39,7 +39,7 @@
                  <div class="card">
                   {% for picture in activity.pictures %}
                   {% if loop.index0 == 0 %}
-                   <img class="card-img-top" src="{{ asset('uploads/pictures/' ~ picture.url) }}" alt="{{picture.legende}}">
+                   <img class="card-img-top" src="{{ asset('uploads/pictures/' ~ picture.url) }}" alt="{{picture.legende}}" style="width:30%; height:30%;">
                   {% endif %}
                   {% endfor %}
                    <div class="card-body">
@@ -51,9 +51,10 @@
                                            {{ activity.category.title }}</small>
                    </div>
                  </div>
+                 <br>
                {% endfor %}
                </div>
-            </div>
+            
                
            
 
