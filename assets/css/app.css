@@ -142,3 +142,18 @@ li{
     padding-bottom: 4px;
     padding-left: 4px;
 }
+
+.label_category{
+    display: inline-block;
+    border-radius: 3px;
+    font-size: 13px;
+    font-weight: bold;
+    padding: 2px 5px 3px;
+    border-radius: 2px;
+    background: #227dd1;
+    color: white;
+}
+.user_block{
+    border: 1px solid #636363 !important;
+    box-shadow: 3px 4px 0px #838383 !important;
+}

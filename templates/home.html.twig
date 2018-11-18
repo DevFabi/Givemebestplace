@@ -44,7 +44,7 @@
                   {% endfor %} 
                    <div class="card-body">
                      <h5 class="card-title"> <a class="activity-title" href="{{path ('show_activity', {'id' : activity.id })}}">{{ activity.title }}</a></h5>
-                     <p class="card-text"> {{ activity.description }}</p>
+                     <p class="card-text"> {{ activity.description |raw}}</p>
                    </div>
                    <div class="card-footer">
                      <small class="text-muted"> {{ activity.createdAt|date('d-m-Y') }} Dans la catégorie

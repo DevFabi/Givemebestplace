@@ -1,74 +1,81 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    <div class="container">
-        <div class="row">
-            <div class="col-md-1"></div>
-            <div class="col-md-10">
-                <h3>{{activity.title}}</h3>
-                <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
-                    <ol class="carousel-indicators">
-                        <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
-                        <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
-                        <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
-                    </ol>
-                    <div class="carousel-inner">
-                        <div class="carousel-item active"></div>
-                        {% for picture in activity.pictures %}
-                            <div {% if loop.index0 == 0 %} class="carousel-item" {% else %} {% endif %}>
-                                <img class="d-block w-100" src="{{ asset('uploads/pictures/' ~ picture.url) }}" alt="{{picture.legende}}">
-                            </div>
-                        {% endfor %}
-                    </div>
-                    <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
-                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                        <span class="sr-only">Previous</span>
-                    </a>
-                    <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
-                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                        <span class="sr-only">Next</span>
-                    </a>
-                </div>
 
-                {{ activity.category.title}}
-                <p>{{activity.description |raw}}</p>
-
-            </div>
-            <div class="col-md-1"></div>
-        </div>
-        <div class="row">
-            <div class="col-md-3"></div>
-            <div class="col-md-6">
-
-                {% include 'comment/create_comment.html.twig' %}
-            </div>
-            <div class="col-md-3"></div>
-        </div>
-        <br>
-        <div class="row">
-            <div class="col-md-3"></div>
-            <div class="col-md-6">
-                <p>
-                    {% for comment in comments %}
-                        <p>
-                            <b>
-                                {{comment.author}}
-                            </b>
-                            <i>{{comment.createdAt|date('d-m-Y')}}</i>
-                        </p>
-                        <p>
-                            {{ comment.msg }}
-                        </p>
-                        <hr>
+    <div class="row">
+        <div class="col-1"></div>
+        <div class="col-7">
+            <h3>{{activity.title}}</h3>
+            <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+                <ol class="carousel-indicators">
+                    <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
+                    <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
+                    <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
+                </ol>
+                <div class="carousel-inner">
+                    {% for picture in activity.pictures %}
+                        <div {% if loop.index0 == 0 %} class="carousel-item" {% else %} {% endif %}>
+                            <img class="d-block w-100" src="{{ asset('uploads/pictures/' ~ picture.url) }}" alt="{{picture.legende}}">
+                        </div>
                     {% endfor %}
-                </p>
-                <div class="navigation">
-                    {{ knp_pagination_render(comments) }}
                 </div>
+                <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span class="sr-only">Previous</span>
+                </a>
+                <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class="sr-only">Next</span>
+                </a>
             </div>
-            <div class="col-md-3"></div>
-        </div>
+            <h3 style="text-align:center;">{{activity.title}}</h3>
+            <p style="text-align:center;">Dans la catégorie
+                <span class="label_category">{{ activity.category.title}}
+                </span>
+                Ecrit par : Le :
+                <i>{{activity.createdAt|date('d-m-Y')}}</i>
+            </p>
+            <p>{{activity.description |raw}}</p>
 
+        </div>
+        <div class="col-3">
+                <br><br>
+            <div class="user_block">
+                sdfghugkyjfthdrgefz <br>zretr <br> rgfe <br><br><br><br>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-3"></div>
+        <div class="col-md-6">
+
+            {% include 'comment/create_comment.html.twig' %}
+        </div>
+        <div class="col-md-3"></div>
+    </div>
+    <br>
+    <div class="row">
+        <div class="col-md-3"></div>
+        <div class="col-md-6">
+            <p>
+                {% for comment in comments %}
+                    <p>
+                        <b>
+                            {{comment.author}}
+                        </b>
+                        <i>{{comment.createdAt|date('d-m-Y')}}</i>
+                    </p>
+                    <p>
+                        {{ comment.msg }}
+                    </p>
+                    <hr>
+                {% endfor %}
+            </p>
+            <div class="navigation">
+                {{ knp_pagination_render(comments) }}
+            </div>
+        </div>
+        <div class="col-md-3"></div>
     </div>
 
 {% endblock %}
