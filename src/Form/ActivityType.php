@@ -12,6 +12,7 @@ use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 use Symfony\Component\Form\Extension\Core\Type\HiddenType;
+use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 
 
 class ActivityType extends AbstractType
@@ -20,7 +21,7 @@ class ActivityType extends AbstractType
     {
         $builder
             ->add('title')
-            ->add('description')
+            ->add('description', TextareaType::class, array('attr' => array('class' => 'ckeditor')))
             ->add('note')
             ->add('category', EntityType::class,[
                 'class' => Category::class,

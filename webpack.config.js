@@ -19,6 +19,7 @@ Encore
      */
     .addEntry('app', './assets/js/app.js')
     .addEntry('pictureScript', './assets/js/pictureScript.js')
+    .addEntry('ckeditor', './assets/js/ckeditor/ckeditor.js')
     //.addEntry('page2', './assets/js/page2.js')
 
     // will require an extra script tag for runtime.js
