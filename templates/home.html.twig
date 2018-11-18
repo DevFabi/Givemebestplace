@@ -41,7 +41,7 @@
                   {% if loop.index0 == 0 %}
                    <img class="card-img-top" src="{{ asset('uploads/pictures/' ~ picture.url) }}" alt="{{picture.legende}}" style="width:30%; height:30%;">
                   {% endif %}
-                  {% endfor %}
+                  {% endfor %} 
                    <div class="card-body">
                      <h5 class="card-title"> <a class="activity-title" href="{{path ('show_activity', {'id' : activity.id })}}">{{ activity.title }}</a></h5>
                      <p class="card-text"> {{ activity.description }}</p>
