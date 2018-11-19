@@ -1,2 +1,19 @@
-{% form_theme formComment 'bootstrap_4_layout.html.twig' %}
-    {{ form(formComment)}}
+
+    
+    <div class="comments">
+            <div class="comment-wrap">
+                    <div class="photo">
+                            <div class="avatar" style="background-image: url('https://s3.amazonaws.com/uifaces/faces/twitter/dancounsell/128.jpg')"></div>
+                    </div>
+                    <div class="comment-block">
+                            {{ form(formComment)}}
+                    </div>
+            </div>  
+
+    </div>
+    
+    </div>
+
+    {% block javascript %}
+    {{ encore_entry_script_tags('app') }}
+    {% endblock %}

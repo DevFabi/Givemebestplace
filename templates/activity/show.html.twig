@@ -5,7 +5,7 @@
     <div class="row">
         <div class="col-1"></div>
         <div class="col-7">
-            <h3>{{activity.title}}</h3>
+            <br><br>
             <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
                 <ol class="carousel-indicators">
                     <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
@@ -39,15 +39,19 @@
 
         </div>
         <div class="col-3">
-                <br><br>
+            <br><br>
             <div class="user_block">
-                sdfghugkyjfthdrgefz <br>zretr <br> rgfe <br><br><br><br>
+                sdfghugkyjfthdrgefz
+                <br>zretr
+                <br>
+                rgfe
+                <br><br><br><br>
             </div>
         </div>
     </div>
     <div class="row">
-        <div class="col-md-3"></div>
-        <div class="col-md-6">
+        <div class="col-md-1"></div>
+        <div class="col-md-7">
 
             {% include 'comment/create_comment.html.twig' %}
         </div>
@@ -55,22 +59,25 @@
     </div>
     <br>
     <div class="row">
-        <div class="col-md-3"></div>
-        <div class="col-md-6">
-            <p>
-                {% for comment in comments %}
-                    <p>
-                        <b>
-                            {{comment.author}}
-                        </b>
-                        <i>{{comment.createdAt|date('d-m-Y')}}</i>
-                    </p>
-                    <p>
-                        {{ comment.msg }}
-                    </p>
-                    <hr>
-                {% endfor %}
-            </p>
+        <div class="col-md-1"></div>
+        <div class="col-md-7">
+                        {% for comment in comments %}
+            <div class="comment-wrap">
+                <div class="photo">{{comment.author}}
+                    <div class="avatar" style="background-image: url('https://s3.amazonaws.com/uifaces/faces/twitter/jsa/128.jpg')"></div>
+                </div>
+                <div class="comment-block">
+                    <p class="comment-text">{{ comment.msg }}</p>
+                    <div class="bottom-comment">
+                        <div class="comment-date">{{comment.createdAt|date('d-m-Y')}}</div>
+                        <ul class="comment-actions">
+                            <li class="complain">Complain</li>
+                            <li class="reply">Reply</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
             <div class="navigation">
                 {{ knp_pagination_render(comments) }}
             </div>
