@@ -1,6 +1,7 @@
 
     
     <div class="comments">
+                {% if app.user %}
             <div class="comment-wrap">
                     <div class="photo">
                             <div class="avatar" style="background-image: url('https://s3.amazonaws.com/uifaces/faces/twitter/dancounsell/128.jpg')"></div>
@@ -9,6 +10,9 @@
                             {{ form(formComment)}}
                     </div>
             </div>  
+            {% else %}
+            <a class="nav-link-add" href="{{path ('fos_user_security_login')}}">Connecte-toi pour écrire un commentaire</a>       
+            {% endif %}
 
     </div>
     

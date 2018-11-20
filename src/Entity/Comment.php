@@ -2,6 +2,7 @@
 
 namespace App\Entity;
 
+use App\Application\Sonata\UserBundle\Entity\User;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -51,6 +52,12 @@ class Comment
      * @ORM\Column(type="integer")
      */
     private $deleted;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Application\Sonata\UserBundle\Entity\User", inversedBy="comments")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $user;
 
     public function getId(): ?int
     {
@@ -137,6 +144,18 @@ class Comment
     public function setDeleted(int $deleted): self
     {
         $this->deleted = $deleted;
+
+        return $this;
+    }
+
+    public function getUser(): ?User
+    {
+        return $this->user;
+    }
+
+    public function setUser(?User $user): self
+    {
+        $this->user = $user;
 
         return $this;
     }

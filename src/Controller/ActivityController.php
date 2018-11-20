@@ -16,6 +16,7 @@ use Doctrine\Common\Persistence\ObjectManager;
 use App\Repository\CommentRepository;
 use Symfony\Component\HttpFoundation\File\Exception\FileException;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use App\Application\Sonata\UserBundle\Entity\User;
 
 class ActivityController extends Controller
 {
@@ -55,8 +56,13 @@ class ActivityController extends Controller
         $form = $this->createForm(CommentType::class, $comment);
 
         $form->handleRequest($request);
+        
+        // On récupère l'utilisateur qui a posté le commentaire
+        $user = $this->get('security.token_storage')->getToken()->getUser();
 
         if ($form->isSubmitted() && $form->isValid()) {
+           $comment->setUser($user); 
+           $comment->setAuthor("A effacer"); 
            $comment->setActivity($activity);
            $comment->setCreatedAt(new \DateTime());
            $comment->setDeleted(0);
@@ -78,8 +84,7 @@ class ActivityController extends Controller
              // Items per page
              5
          );
- 
-
+      
         return $this->render('activity/show.html.twig', [
             'formComment' => $form->createView(),
             'activity' => $activity,

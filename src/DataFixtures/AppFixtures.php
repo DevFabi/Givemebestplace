@@ -15,7 +15,7 @@ class AppFixtures extends Fixture
 
         $faker = \Faker\Factory::create('fr_FR');
 
-       for ($i=1; $i <= 4 ; $i++) { 
+       for ($i=1; $i <= 2 ; $i++) { 
             $category = new Category();
             $category->setTitle($faker->word())
                      ->setDescription($faker->paragraph());
@@ -29,17 +29,6 @@ class AppFixtures extends Fixture
                     ->setCreatedAt(new \DateTime())
                     ->setDeleted(0);
                     $manager->persist($activity);
-                    for ($k=1; $k <= mt_rand(4,10) ; $k++) { 
-                        $comment = new Comment();
-                        $comment->setAuthor($faker->name)
-                                ->setSite($faker->url)
-                                ->setMsg($faker->paragraph())
-                                ->setNote($faker->numberBetween($min = 1, $max = 5))
-                                ->setActivity($activity)
-                                ->setCreatedAt(new \DateTime())
-                                ->setDeleted(0);
-                                $manager->persist($comment);
-                        }
                 }
         }
         $manager->flush();
