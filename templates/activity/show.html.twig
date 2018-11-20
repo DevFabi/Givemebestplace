@@ -14,7 +14,7 @@
                 </ol>
                 <div class="carousel-inner">
                     {% for picture in activity.pictures %}
-                        <div {% if loop.index0 == 0 %} class="carousel-item" {% else %} {% endif %}>
+                        <div {% if loop.index0 == 0 %} class="carousel-item active" {% else %} class="carousel-item" {% endif %}>
                             <img class="d-block w-100" src="{{ asset('uploads/pictures/' ~ picture.url) }}" alt="{{picture.legende}}">
                         </div>
                     {% endfor %}
