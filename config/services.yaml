@@ -45,3 +45,16 @@ services:
             - { name: sonata.admin, manager_type: orm, label: Activity }
         public: true
 
+    admin.comment:
+        class: App\Admin\CommentAdmin
+        arguments: [~, App\Entity\Comment, ~]
+        tags:
+            - { name: sonata.admin, manager_type: orm, label: Comment }
+        public: true
+
+    admin.picture:
+        class: App\Admin\PictureAdmin
+        arguments: [~, App\Entity\Picture, ~]
+        tags:
+            - { name: sonata.admin, manager_type: orm, label: Picture }
+        public: true

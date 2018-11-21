@@ -102,8 +102,9 @@ class ActivityController extends Controller
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+  
             $pictures = $activity->getPictures(); // On récupère toutes les photos ajoutées
-            
+          
             if($pictures){ // S'il y a des photos
                 foreach ($pictures as $picture ) { // Pour chaque photo
                    $file = $picture->getUrl(); // On récupère l'url uploadé
@@ -120,6 +121,7 @@ class ActivityController extends Controller
                         $picture->setUrl($fileName);
                 }
             }
+
             
            $activity->setCreatedAt(new \DateTime());
            $activity->setDeleted(0);
