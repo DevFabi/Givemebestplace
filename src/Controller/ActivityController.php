@@ -17,6 +17,7 @@ use App\Repository\CommentRepository;
 use Symfony\Component\HttpFoundation\File\Exception\FileException;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use App\Application\Sonata\UserBundle\Entity\User;
+use Symfony\Component\HttpFoundation\File\Exception\UploadException;
 
 class ActivityController extends Controller
 {
@@ -108,6 +109,11 @@ class ActivityController extends Controller
             if($pictures){ // S'il y a des photos
                 foreach ($pictures as $picture ) { // Pour chaque photo
                    $file = $picture->getUrl(); // On récupère l'url uploadé
+
+                   if (UPLOAD_ERR_OK !== $file->getError()) {
+                    throw new UploadException($file->getErrorMessage());
+                }
+
                    $fileName = $this->generateUniqueFileName().'.'.$file->guessExtension(); // On génère un nom de fichier
                    // Move the file to the directory where brochures are stored
                         try {
