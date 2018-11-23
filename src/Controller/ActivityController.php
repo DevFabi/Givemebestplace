@@ -101,9 +101,9 @@ class ActivityController extends Controller
         $activity = new Activity();
         $form = $this->createForm(ActivityType::class, $activity);
         $form->handleRequest($request);
-
+        $user = $this->get('security.token_storage')->getToken()->getUser();
         if ($form->isSubmitted() && $form->isValid()) {
-  
+            
             $pictures = $activity->getPictures(); // On récupère toutes les photos ajoutées
           
             if($pictures){ // S'il y a des photos
@@ -128,7 +128,7 @@ class ActivityController extends Controller
                 }
             }
 
-            
+        $activity->setUser($user); 
            $activity->setCreatedAt(new \DateTime());
            $activity->setDeleted(0);
            $manager->persist($activity);

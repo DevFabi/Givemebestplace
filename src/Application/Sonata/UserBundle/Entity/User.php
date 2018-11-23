@@ -2,6 +2,7 @@
 
 namespace App\Application\Sonata\UserBundle\Entity;
 
+use App\Entity\Activity;
 use App\Entity\Comment;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
@@ -28,10 +29,16 @@ class User extends BaseUser
      */
     private $comments;
 
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Activity", mappedBy="user")
+     */
+    private $activities;
+
     public function __construct()
     {
         parent::__construct();
         $this->comments = new ArrayCollection();
+        $this->activities = new ArrayCollection();
     }
 
     /**
@@ -69,6 +76,37 @@ class User extends BaseUser
             // set the owning side to null (unless already changed)
             if ($comment->getUser() === $this) {
                 $comment->setUser(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Activity[]
+     */
+    public function getActivities(): Collection
+    {
+        return $this->activities;
+    }
+
+    public function addActivity(Activity $activity): self
+    {
+        if (!$this->activities->contains($activity)) {
+            $this->activities[] = $activity;
+            $activity->setUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeActivity(Activity $activity): self
+    {
+        if ($this->activities->contains($activity)) {
+            $this->activities->removeElement($activity);
+            // set the owning side to null (unless already changed)
+            if ($activity->getUser() === $this) {
+                $activity->setUser(null);
             }
         }
 

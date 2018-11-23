@@ -2,6 +2,7 @@
 
 namespace App\Entity;
 
+use App\Application\Sonata\UserBundle\Entity\User;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
@@ -62,6 +63,11 @@ class Activity
      * @ORM\OneToMany(targetEntity="App\Entity\Picture", mappedBy="activity", cascade={"persist"})
      */
     private $pictures;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Application\Sonata\UserBundle\Entity\User", inversedBy="activities")
+     */
+    private $user;
 
     public function __construct()
     {
@@ -204,6 +210,18 @@ class Activity
                 $picture->setActivity(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getUser(): ?User
+    {
+        return $this->user;
+    }
+
+    public function setUser(?User $user): self
+    {
+        $this->user = $user;
 
         return $this;
     }
