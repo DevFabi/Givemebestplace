@@ -32,7 +32,7 @@
             <p style="text-align:center;">Dans la catégorie
                 <span class="label_category">{{ activity.category.title}}
                 </span>
-                Ecrit par : Le :
+                Ecrit par : {{activity.user}} Le :
                 <i>{{activity.createdAt|date('d-m-Y')}}</i>
             </p>
             <p>{{activity.description |raw}}</p>
@@ -40,13 +40,21 @@
         </div>
         <div class="col-3">
             <br><br>
-            <div class="user_block">
-                sdfghugkyjfthdrgefz
-                <br>zretr
-                <br>
-                rgfe
-                <br><br><br><br>
+
+<div class="content">
+        <div class="card">
+          <div class="firstinfo"><img src="https://s3.amazonaws.com/uifaces/faces/twitter/mrvanz/128.jpg"/>
+            <div class="profileinfo">
+              <h3> {{activity.user}}</h3>
+              <h6>Autheur de l'article</h6>
+              <p class="bio">Lived all my life on the top of mount Fuji, learning the way to be a Ninja Dev.</p>
             </div>
+          </div>
+        </div>
+
+      </div>
+
+       
         </div>
     </div>
     <div class="row">
