@@ -6,6 +6,7 @@
         "ext-ctype": "*",
         "ext-iconv": "*",
         "knplabs/knp-paginator-bundle": "^2.8",
+        "php-curl-class/php-curl-class": "^8.3",
         "sensio/framework-extra-bundle": "^5.1",
         "sonata-project/admin-bundle": "^3.40",
         "sonata-project/doctrine-orm-admin-bundle": "^3.6",

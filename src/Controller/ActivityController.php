@@ -18,9 +18,34 @@ use Symfony\Component\HttpFoundation\File\Exception\FileException;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use App\Application\Sonata\UserBundle\Entity\User;
 use Symfony\Component\HttpFoundation\File\Exception\UploadException;
+use \Curl\Curl;
 
 class ActivityController extends Controller
 {
+
+    /**
+     * @Route("/curl", name="curl")
+     */
+    public function curl()
+    {
+        $curl = new Curl();
+        $curl->setUserAgent('Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:53.0) Gecko/20100101 Firefox/53.0');
+        $curl->get('https://www.google.com/search', array(
+            'q' => 'fabiolabelet',
+        ));
+        if ($curl->error) {
+            echo 'Error: ' . $curl->errorCode . ': ' . $curl->errorMessage . "\n";
+        } else {
+            echo 'Response:' . "\n";
+            var_dump($curl->response);
+        }
+       
+        return $this->render('curl.html.twig');
+    }
+
+   
+
+
      /**
      * @Route("/", name="home")
      */
