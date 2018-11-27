@@ -33,17 +33,27 @@ class ActivityController extends Controller
         $curl->get('https://www.google.com/search', array(
             'q' => 'fabiolabelet',
         ));
-        if ($curl->error) {
-            echo 'Error: ' . $curl->errorCode . ': ' . $curl->errorMessage . "\n";
-        } else {
-            echo 'Response:' . "\n";
-            var_dump($curl->response);
+
+        # Create a DOM parser object
+        $dom = new \DOMDocument();
+
+        # Parse the HTML from Google.
+        # The @ before the method call suppresses any warnings that
+        # loadHTML might throw because of invalid HTML in the page.
+        @$dom->loadHTML($curl->response);
+
+        # Iterate over all the <a> tags
+        foreach($dom->getElementsByTagName('a') as $link) {
+            $href = $link->getAttribute('href');
+            $anchor = $link->nodeValue;
+            echo $href,"\t",$anchor,"\n";
         }
+
+         
+
        
         return $this->render('curl.html.twig');
     }
-
-   
 
 
      /**
