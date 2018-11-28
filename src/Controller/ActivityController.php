@@ -31,7 +31,7 @@ class ActivityController extends Controller
         $curl = new Curl();
         $curl->setUserAgent('Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:53.0) Gecko/20100101 Firefox/53.0');
         $curl->get('https://www.google.com/search', array(
-            'q' => 'fabiolabelet',
+            'q' => 'Gateau chocolat',
         ));
 
         # Create a DOM parser object
