@@ -1,10 +1,4 @@
-// assets/js/app.js
-
-require('../css/app.css');
-require('../css/comment.css');
-require('../css/global.scss');
-
-
+require('../css/profil.css');
 
 import $ from 'jquery';
 

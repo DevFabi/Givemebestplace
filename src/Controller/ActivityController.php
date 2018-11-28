@@ -44,6 +44,7 @@ class ActivityController extends Controller
 
         # Iterate over all the <a> tags
         foreach($dom->getElementsByTagName('a') as $link) {
+          //  var_dump($link);
             $href = $link->getAttribute('href');
             $anchor = $link->nodeValue;
             echo $href,"\t",$anchor,"\n";
