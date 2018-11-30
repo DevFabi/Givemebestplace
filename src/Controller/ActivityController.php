@@ -188,4 +188,11 @@ class ActivityController extends Controller
         // uniqid(), which is based on timestamps
         return md5(uniqid());
     }
+
+    public function isLikeByUser(User $user) : bool{
+        foreach($this->likes as $like){
+            if($like.getUser() === $user) return true;
+        } 
+        return false;
+    }
 }

@@ -57,7 +57,13 @@
                         Dans la catégorie
                         {{ activity.category.title }}
                         <a href="">
-                             <i class="fas fa-heart"></i> {{ activity.likes | length }} LIKES
+                            {% if app.user and activity.isLikeByUser(app.user) %}
+                            <i class="fas fa-heart"></i> 
+                            {% else %}
+                            <i class="far fa-heart"></i> 
+                            {% endif %}
+                            
+                             {{ activity.likes | length }} LIKES
                         </a></small>
                 </div>
             </div>
