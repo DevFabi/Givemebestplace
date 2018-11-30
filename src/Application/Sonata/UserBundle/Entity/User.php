@@ -4,6 +4,7 @@ namespace App\Application\Sonata\UserBundle\Entity;
 
 use App\Entity\Activity;
 use App\Entity\Comment;
+use App\Entity\Likes;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Sonata\UserBundle\Entity\BaseUser as BaseUser;
@@ -34,11 +35,17 @@ class User extends BaseUser
      */
     private $activities;
 
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Likes", mappedBy="User")
+     */
+    private $likes;
+
     public function __construct()
     {
         parent::__construct();
         $this->comments = new ArrayCollection();
         $this->activities = new ArrayCollection();
+        $this->likes = new ArrayCollection();
     }
 
     /**
@@ -107,6 +114,37 @@ class User extends BaseUser
             // set the owning side to null (unless already changed)
             if ($activity->getUser() === $this) {
                 $activity->setUser(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Likes[]
+     */
+    public function getLikes(): Collection
+    {
+        return $this->likes;
+    }
+
+    public function addLike(Likes $like): self
+    {
+        if (!$this->likes->contains($like)) {
+            $this->likes[] = $like;
+            $like->setUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeLike(Likes $like): self
+    {
+        if ($this->likes->contains($like)) {
+            $this->likes->removeElement($like);
+            // set the owning side to null (unless already changed)
+            if ($like->getUser() === $this) {
+                $like->setUser(null);
             }
         }
 

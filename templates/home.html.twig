@@ -2,82 +2,87 @@
 
 {% block body %}
 
-    <div class="container-fluid">
-        <div class="row">
-            <div class="col-3"></div>
-            <div class="col-6">
-                {% for category in categories %}
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-3"></div>
+        <div class="col-6">
+            {% for category in categories %}
 
-                    <a class="nav-item" href="{{path ('show_category', {'id' : category.id })}}">{{ category.title }}</a>
+            <a class="nav-item" href="{{path ('show_category', {'id' : category.id })}}">{{ category.title }}</a>
 
-                {% endfor %}
-            </div>
+            {% endfor %}
         </div>
+    </div>
 
-        <div class="row">
+    <div class="row">
 
-            <div class="col-3">
-                <div class="bloc-gauche">
-                    <p style="text-align:center;"><br>
-                        Top 5 des utilisateurs :
-                        <br>
-                        1. zrr zj
-                        <br>
-                        2. sqjd fe
-                        <br>
-                        3. kdhks
-                        <br>
-                        4. ajerh
-                        <br>
-                        5. ksdjoisj
-                    </p>
-
-                </div>
-            </div>
-            <div class="col-6">
-                {% for activity in activities %}
-                    <div class="card">
-                        {% for picture in activity.pictures %}
-                            {% if loop.index0 == 0 %}
-                                <img class="card-img-top" src="{{ asset('uploads/pictures/' ~ picture.url) }}" alt="{{picture.legende}}" style="width:30%; height:30%;">
-                            {% endif %}
-                        {% endfor %}
-                        <div class="card-body">
-                            <h5 class="card-title">
-                                <a class="activity-title" href="{{path ('show_activity', {'id' : activity.id })}}">{{ activity.title }}</a>
-                            </h5>
-                            <p class="card-text">
-                                {{ activity.description |raw}}</p>
-                        </div>
-                        <div class="card-footer">
-                            <small class="text-muted">
-                                {{ activity.createdAt|date('d-m-Y') }}
-                                Dans la catégorie
-                                {{ activity.category.title }}</small>
-                        </div>
-                    </div>
+        <div class="col-3">
+            <div class="bloc-gauche">
+                <p style="text-align:center;"><br>
+                    Top 5 des utilisateurs :
                     <br>
-                {% endfor %}
+                    1. zrr zj
+                    <br>
+                    2. sqjd fe
+                    <br>
+                    3. kdhks
+                    <br>
+                    4. ajerh
+                    <br>
+                    5. ksdjoisj
+                </p>
+
             </div>
-
-            <div class="col-3">
-                <div class="bloc-utilisateur">
-                    {% if app.user %}
-                        <p style="text-align:center;">Bonjour,
-                            <span style="font-weight:bold;font-size:20px;text-align:center;">
-
-                                {{ app.user.username }}</span>
-                            !</p>
-                    {% endif %}
-                    <br><br><br><br>
+        </div>
+        <div class="col-6">
+            {% for activity in activities %}
+            <div class="card">
+                {% for picture in activity.pictures %}
+                {% if loop.index0 == 0 %}
+                <img class="card-img-top" src="{{ asset('uploads/pictures/' ~ picture.url) }}" alt="{{picture.legende}}"
+                    style="width:30%; height:30%;">
+                {% endif %}
+                {% endfor %}
+                <div class="card-body">
+                    <h5 class="card-title">
+                        <a class="activity-title" href="{{path ('show_activity', {'id' : activity.id })}}">{{
+                            activity.title }}</a>
+                    </h5>
+                    <p class="card-text">
+                        {{ activity.description |raw}}</p>
+                </div>
+                <div class="card-footer">
+                    <small class="text-muted">
+                        {{ activity.createdAt|date('d-m-Y') }}
+                        Dans la catégorie
+                        {{ activity.category.title }}
+                        <a href="">
+                             <i class="fas fa-heart"></i> {{ activity.likes | length }} LIKES
+                        </a></small>
                 </div>
             </div>
-
+            <br>
+            {% endfor %}
         </div>
-        <div class="navigation">
-            {{ knp_pagination_render(activities) }}
+
+        <div class="col-3">
+            <div class="bloc-utilisateur">
+                {% if app.user %}
+                <p style="text-align:center;">Bonjour,
+                    <span style="font-weight:bold;font-size:20px;text-align:center;">
+
+                        {{ app.user.username }}</span>
+                    !</p>
+                {% endif %}
+                <br><br><br><br>
+            </div>
         </div>
 
     </div>
+    <div class="navigation">
+        {{ knp_pagination_render(activities) }}
+    </div>
+
+</div>
 
 {% endblock %}
