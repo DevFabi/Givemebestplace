@@ -1,24 +1,26 @@
 <?php
 namespace App\Controller;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\Routing\Annotation\Route;
-use App\Repository\ActivityRepository;
-use App\Repository\CategoryRepository;
+use \Curl\Curl;
+use App\Entity\Comment;
+use App\Entity\Picture;
 use App\Entity\Activity;
 use App\Entity\Category;
-use App\Entity\Picture;
 use App\Form\CommentType;
-use App\Form\ActivityType;
 use App\Form\PictureType;
-use App\Entity\Comment;
+use App\Form\ActivityType;
+use App\Repository\LikesRepository;
+use App\Repository\CommentRepository;
+use App\Repository\ActivityRepository;
+use App\Repository\CategoryRepository;
 use Symfony\Component\HttpFoundation\Request;
 use Doctrine\Common\Persistence\ObjectManager;
-use App\Repository\CommentRepository;
-use Symfony\Component\HttpFoundation\File\Exception\FileException;
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\Routing\Annotation\Route;
 use App\Application\Sonata\UserBundle\Entity\User;
+use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\File\Exception\FileException;
 use Symfony\Component\HttpFoundation\File\Exception\UploadException;
-use \Curl\Curl;
+use App\Entity\Likes;
 
 class ActivityController extends Controller
 {
@@ -189,10 +191,41 @@ class ActivityController extends Controller
         return md5(uniqid());
     }
 
-    public function isLikeByUser(User $user) : bool{
-        foreach($this->likes as $like){
-            if($like.getUser() === $user) return true;
-        } 
-        return false;
+
+     /**
+     * @Route("/activity/{id}/like", name="like")
+     */
+    public function like(Activity $activity, ObjectManager $manager, LikesRepository $likeRepo){
+        $user = $this->get('security.token_storage')->getToken()->getUser();
+        if(!$user) return $this->json([
+            'code' => 403,
+            'message' => "Unauthorized"
+        ], 403); 
+        if($activity->isLikeByUser($user)){
+            $like = $likeRepo->findOneBy([
+                'activity' => $activity,
+                'user' => $user
+            ]);
+            $manager->remove($like);
+            $manager->flush();
+
+            return $this->json([
+                'code' => 200,
+                'message'=> 'bien supprimé',
+                'likes' => $likeRepo->count($like)
+            ]);
+        }
+        $like = new Likes();
+        $like->setActivity($activity)
+             ->setUser($user)
+             ->setCreatedAt(new \DateTime());
+             $manager->persist($like);
+             $manager->flush();
+
+        return $this->json([
+            'message' => 'bien ajouté',
+            'likes' => $likeRepo->count($like)
+        ], 200);
+
     }
-}
+}  

@@ -2,8 +2,9 @@
 
 namespace App\Entity;
 
-use App\Application\Sonata\UserBundle\Entity\User;
+use App\Entity\Activity;
 use Doctrine\ORM\Mapping as ORM;
+use App\Application\Sonata\UserBundle\Entity\User;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\LikesRepository")
@@ -20,12 +21,12 @@ class Likes
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\Activity", inversedBy="likes")
      */
-    private $Activity;
+    private $activity;
 
     /**
      * @ORM\ManyToOne(targetEntity="App\Application\Sonata\UserBundle\Entity\User", inversedBy="likes")
      */
-    private $User;
+    private $user;
 
     /**
      * @ORM\Column(type="datetime")
@@ -37,26 +38,26 @@ class Likes
         return $this->id;
     }
 
-    public function getActivity(): ?Activity
+    public function getActivity(): ?activity
     {
-        return $this->Activity;
+        return $this->activity;
     }
 
-    public function setActivity(?Activity $Activity): self
+    public function setActivity(?activity $activity): self
     {
-        $this->Activity = $Activity;
+        $this->activity = $activity;
 
         return $this;
     }
 
-    public function getUser(): ?User
+    public function getUser(): ?user
     {
-        return $this->User;
+        return $this->user;
     }
 
-    public function setUser(?User $User): self
+    public function setUser(?user $user): self
     {
-        $this->User = $User;
+        $this->user = $user;
 
         return $this;
     }

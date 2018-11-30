@@ -56,7 +56,8 @@
                         {{ activity.createdAt|date('d-m-Y') }}
                         Dans la catégorie
                         {{ activity.category.title }}
-                        <a href="" class="btn btn-link js-like">
+                        
+                        <a href="{{path ('like', {'id' : activity.id })}}" class="btn btn-link js-like">
                             {% if app.user and activity.isLikeByUser(app.user) %}
                             <i class="fas fa-heart"></i> 
                             {% else %}

@@ -2,11 +2,13 @@
 
 namespace App\Entity;
 
-use App\Application\Sonata\UserBundle\Entity\User;
-use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
+use App\Entity\Likes;
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\Common\Collections\Collection;
+use Doctrine\Common\Collections\ArrayCollection;
+use App\Application\Sonata\UserBundle\Entity\User;
 use Symfony\Component\Validator\Constraints as Assert;
+
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\ActivityRepository")
@@ -261,5 +263,15 @@ class Activity
         }
 
         return $this;
+    }
+
+    public function isLikeByUser(User $user) : bool
+    {
+        foreach ($this->likes as $like) {
+            if ($like->getUser() === $user) {
+                return true;
+            }
+        }
+        return false;
     }
 }
