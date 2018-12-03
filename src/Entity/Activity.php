@@ -72,7 +72,7 @@ class Activity
     private $user;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Likes", mappedBy="Activity")
+     * @ORM\OneToMany(targetEntity="App\Entity\Likes", mappedBy="activity")
      */
     private $likes;
 

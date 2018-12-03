@@ -196,7 +196,7 @@ class ActivityController extends Controller
      * @Route("/activity/{id}/like", name="like")
      */
     public function like(Activity $activity, ObjectManager $manager, LikesRepository $likeRepo){
-        $user = $this->get('security.token_storage')->getToken()->getUser();
+        $user = $this->getUser();
         if(!$user) return $this->json([
             'code' => 403,
             'message' => "Unauthorized"
@@ -212,7 +212,7 @@ class ActivityController extends Controller
             return $this->json([
                 'code' => 200,
                 'message'=> 'bien supprimé',
-                'likes' => $likeRepo->count($like)
+                'likes' => $likeRepo->count(['activity' =>$activity])
             ]);
         }
         $like = new Likes();
@@ -224,7 +224,7 @@ class ActivityController extends Controller
 
         return $this->json([
             'message' => 'bien ajouté',
-            'likes' => $likeRepo->count($like)
+            'likes' => $likeRepo->count(['activity' => $activity])
         ], 200);
 
     }
