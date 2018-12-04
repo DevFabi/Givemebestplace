@@ -62,10 +62,13 @@ class ActivityController extends Controller
      /**
      * @Route("/", name="home")
      */
-    public function home(ActivityRepository $repo, CategoryRepository $repoCat,Request $request)
+    public function home(ActivityRepository $repo, CategoryRepository $repoCat, LikesRepository $repoLike,Request $request)
     {
+        $user = $this->get('security.token_storage')->getToken()->getUser();
         $allActivities = $repo->findAll();
         $categories = $repoCat->findAll();
+        $likes = $repoLike->findByUser($user);
+        
 
         /* @var $paginator \Knp\Component\Pager\Paginator */
         $paginator  = $this->get('knp_paginator');
@@ -82,7 +85,8 @@ class ActivityController extends Controller
 
         return $this->render('home.html.twig', [
             'activities' => $activities,
-            'categories' => $categories
+            'categories' => $categories,
+            'likes' => $likes
         ]);
     }
 

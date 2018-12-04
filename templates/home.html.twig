@@ -2,124 +2,160 @@
 
 {% block body %}
 
-<div class="container-fluid">
-    <br>
-    <div class="row">
-        <div class="col-3"></div>
-        <div class="col-6">
-            {% if app.user %}
-            <p style="text-align:center;">Bonjour,
-                <span style="font-weight:bold;font-size:20px;text-align:center;">
-
-                    {{ app.user.username }}</span>
-                !</p>
-            {% endif %}
-        </div>
-        <div class="col-3"></div>
-    </div>
-
-    <div class="row">
-
-        <div class="col-3">
-            <div class="bloc-gauche">
-                <p style="text-align:center;"><br>
-                   Quelle catégorie souhaite tu voir ? <br>
-                   {% for category in categories %}
-
-            <a class="nav-item" href="{{path ('show_category', {'id' : category.id })}}">{{ category.title }}</a>
-
-            {% endfor %}
-                </p>
-
-            </div>
-        </div>
-        <div class="col-6">
-            {% for activity in activities %}
-            <div class="card">
-                {% for picture in activity.pictures %}
-                {% if loop.index0 == 0 %}
-                <img class="card-img-top" src="{{ asset('uploads/pictures/' ~ picture.url) }}" alt="{{picture.legende}}"
-                    style="width:30%; height:30%;">
-                {% endif %}
-                {% endfor %}
-                <div class="card-body">
-                    <h5 class="card-title">
-                        <a class="activity-title" href="{{path ('show_activity', {'id' : activity.id })}}">{{
-                            activity.title }}</a>
-                    </h5>
-                    <p class="card-text">
-                        {{ activity.description |raw}}</p>
-                </div>
-                <div class="card-footer">
-                    <small class="text-muted">
-                        {{ activity.createdAt|date('d-m-Y') }}
-                        Dans la catégorie
-                        {{ activity.category.title }}
-                        
-                        <a href="{{path ('like', {'id' : activity.id })}}" class="btn btn-link js-like">
-                            {% if app.user and activity.isLikeByUser(app.user) %}
-                            <i class="fas fa-heart"></i> 
-                            {% else %}
-                            <i class="far fa-heart"></i> 
-                            {% endif %}
-                            
-                            <span class="js-likes"> {{ activity.likes | length }}  </span>
-                            <span class="js-label"> J'aime </span>
-                        </a></small>
-                </div>
-            </div>
-            <br>
-            {% endfor %}
-        </div>
-
-        <div class="col-3">
-            <div class="bloc-utilisateur">
+    <div class="container-fluid">
+        <br>
+        <div class="row">
+            <div class="col-1"></div>
+            <div class="col-6">
                 {% if app.user %}
-                <p style="text-align:center;">Bonjour,
-                    <span style="font-weight:bold;font-size:20px;text-align:center;">
+                    <p style="text-align:center;">Bonjour,
+                        <span style="font-weight:bold;font-size:20px;text-align:center;">
 
-                        {{ app.user.username }}</span>
-                    !</p>
+                            {{ app.user.username }}
+                            <i class="fas fa-child"></i>
+                        </span>
+                        !</p>
                 {% endif %}
-                <br><br><br><br>
+            </div>
+            <div class="col-5">
+
+                {% if app.user %}
+                    <a class="nav-link-add" href="{{path ('create_activity')}}">Ajouter une activité
+                        <i class="fas fa-plus-square"></i>
+                    </a>
+                    <span class="truc-separation">
+                        ¤
+                    </span>
+                    <a class="nav-link-co" href="{{path ('fos_user_security_logout')}}">Deconnexion
+                        <i class="fas fa-sign-out-alt"></i>
+                    </a>
+                {% else %}
+                    <a class="nav-link-co" href="{{path ('fos_user_security_login')}}">Connecte-toi !</a>
+                    <span class="truc-separation">
+                        ¤
+                    </span>
+                    <a class="nav-link-co" href="{{path ('fos_user_registration_register')}}">Inscription</a>
+                {% endif %}
             </div>
         </div>
 
-    </div>
-    <div class="navigation">
-        {{ knp_pagination_render(activities) }}
-    </div>
+        <div class="row">
 
-</div>
+            <div class="col-3">
+                <div class="bloc-gauche">
+                    <p style="text-align:center;"><br>
+                        Quelle catégorie souhaite tu voir ?
+                        <br>
+                        {% for category in categories %}
+
+                            <a class="nav-item" href="{{path ('show_category', {'id' : category.id })}}">{{ category.title }}</a>
+
+                        {% endfor %}
+                    </p>
+
+                </div>
+            </div>
+            <div class="col-6">
+                {% for activity in activities %}
+                    <div class="card">
+                        {% for picture in activity.pictures %}
+                            {% if loop.index0 == 0 %}
+                                <img class="card-img-top" src="{{ asset('uploads/pictures/' ~ picture.url) }}" alt="{{picture.legende}}" style="width:30%; height:30%;">
+                            {% endif %}
+                        {% endfor %}
+                        <div class="card-body">
+                            <h5 class="card-title">
+                                <a class="activity-title" href="{{path ('show_activity', {'id' : activity.id })}}">{{
+                            activity.title }}</a>
+                            </h5>
+                            <p class="card-text">
+                                {{ activity.description |raw}}</p>
+                        </div>
+                        <div class="card-footer">
+                            <small class="text-muted">
+                                {{ activity.createdAt|date('d-m-Y') }}
+                                Dans la catégorie
+                                {{ activity.category.title }}
+
+                                <a href="{{path ('like', {'id' : activity.id })}}" class="js-like">
+                                    {% if app.user and activity.isLikeByUser(app.user) %}
+                                        <i class="fas fa-heart"></i>
+                                    {% else %}
+                                        <i class="far fa-heart"></i>
+                                    {% endif %}
+
+                                    <span class="js-likes">
+                                        {{ activity.likes | length }}
+                                    </span>
+                                    <span class="js-label">
+                                        J'aime
+                                    </span>
+                                </a>
+                            </small>
+                        </div>
+                    </div>
+                    <br>
+                {% endfor %}
+            </div>
+
+            <div class="col-3">
+                {% if app.user %}
+                    <div class="bloc-utilisateur">
+
+                        <p class="text-bloc-title">{{ likes | length}}
+                            Activités que tu aimes
+                            <i class="fas fa-grin-hearts"></i>
+                        </p><br>
+
+                        {% for like in likes %}
+                            <a href="{{path ('show_activity', {'id' : like.activity.id  })}}" style="text-decoration: none;">
+                                <span class="lien-activity">
+                                    {{ like.activity.title }}
+                                </span>
+                                <br>
+                            </a>
+                            <br>
+                        {% endfor %}
+
+                    </div>
+                {% endif %}
+            </div>
+
+        </div>
+        <div class="navigation">
+            {{ knp_pagination_render(activities) }}
+        </div>
+
+    </div>
 
 {% endblock %}
 
 {% block javascripts %}
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
     <script>
-        function onClickBtnLike(event){
+        function onClickBtnLike(event) {
             event.preventDefault();
             const url = this.href;
             const spanCount = this.querySelector('span.js-likes');
             const icone = this.querySelector('i');
 
-            axios.get(url).then(function(response) {
+            axios.get(url).then(function (response) {
                 spanCount.textContent = response.data.likes;
-                if(icone.classList.contains('fas')){
+                if (icone.classList.contains('fas')) {
                     icone.classList.replace('fas', 'far');
-                }else{
+                } else {
                     icone.classList.replace('far', 'fas');
                 }
-            }).catch(function(error) {
-                if(error.response.status === 403) {
+            }).catch(function (error) {
+                if (error.response.status === 403) {
                     window.alert("Vous ne pouvez pas liker un article si vous n'êtes pas connecté");
-                } else{ 
+                } else {
                     window.alert("Une erreur s'est produite");
                 }
             });
         }
 
-        document.querySelectorAll('a.js-like').forEach(function(link) {
+        document.querySelectorAll('a.js-like').forEach(function (link) {
             link.addEventListener('click', onClickBtnLike);
         })
     </script>

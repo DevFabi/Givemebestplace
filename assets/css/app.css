@@ -3,15 +3,6 @@ body {
     background-color: rgb(255, 255, 255);
 }
 
-.background-nav{
-    background-color: rgb(247, 247, 247);
-    border: 1px solid #b3b3b3;
-    box-shadow: 2px 3px 0px #b3b3b3;
-    margin: 4px;
-    padding: 3px;
-    
-}
-
 .nav-item{
     display: inline-block;
     text-decoration: none;
@@ -29,35 +20,43 @@ body {
     font-weight:  bold;
 }
 .nav-link-add{
-    padding: 5px 5px;
-    margin: 3px 3px;
-    height: auto;
-    top: 12px;
+   
     text-transform: uppercase;
     text-align: center;
     font-weight: bold;
-    border-radius: 3px;
-    border: 2px solid #0a0a0a;
     color: #0a0a0a;
-    background: #66e2d5;
+    border-bottom: 1px solid lightpink;
     text-decoration: none;
-    display: block;
 }
 
 .nav-link-add:hover{
-    padding: 5px 5px;
-    margin: 3px 3px;
-    height: auto;
-    top: 12px;
+   
     text-transform: uppercase;
     text-align: center;
     font-weight: bold;
-    border-radius: 3px;
-    border: 2px solid #0a0a0a;
-    color: #0a0a0a;
-    background: #8eebe1;
+    border-bottom: 3px solid lightpink;
+    color: #414141;
     text-decoration: none;
-    display: block;
+}
+
+.nav-link-co{
+   
+    text-transform: uppercase;
+    text-align: center;
+    font-weight: bold;
+    color: #0a0a0a;
+    border-bottom: 1px solid rgb(182, 240, 255);
+    text-decoration: none;
+}
+
+.nav-link-co:hover{
+   
+    text-transform: uppercase;
+    text-align: center;
+    font-weight: bold;
+    border-bottom: 3px solid rgb(182, 240, 255);
+    color: #414141;
+    text-decoration: none;
 }
 
 .nav-link:hover{
@@ -110,14 +109,14 @@ body {
     text-decoration: none;
 }
 .bloc-utilisateur{
-    background: #ffdcbb;
-    border: 1px solid #ffbc7d;
-    box-shadow: 3px 3px 0px #ffbc7d;
+    background: #E6D6D1;
+    border: 1px solid rgb(177, 165, 161);
+    box-shadow: 3px 3px 0px rgb(194, 173, 167);
 }
 .bloc-gauche{
-    background: #e2ecff;
-    border: 1px solid #7daaff;
-    box-shadow: 3px 3px 3px #7daaff;
+    background: #FAF4ED;
+    border: 1px solid rgb(192, 178, 162);
+    box-shadow: 3px 3px 3px rgb(231, 225, 217);
 }
 .add_tag_link{
     background: #ffdcbb;
@@ -156,4 +155,52 @@ li{
 .user_block{
     border: 1px solid #636363 !important;
     box-shadow: 3px 4px 0px #838383 !important;
+}
+
+.truc-separation{
+    color: rgb(223, 188, 132);
+    font-weight: bold;
+    font-size: 20px;
+}
+
+.text-bloc-title{
+    text-transform: uppercase;
+    text-align: center;
+}
+.lien-activity{
+    text-transform: uppercase;
+    font-weight: bold;
+    color: #000000;
+    text-decoration: none;
+    margin: 6px;
+}
+
+.lien-activity:hover{
+    text-transform: uppercase;
+    font-weight: bold;
+    border-bottom: 3px solid lightpink;
+    color: #000000;
+    text-decoration: none;
+    margin: 6px;
+}
+.js-like{
+    text-transform: uppercase;
+    font-weight: bold;
+    border-bottom: 1px solid lightpink;
+    color: #000000;
+    text-decoration: none;
+    margin: 6px;
+    font-size: 15px;
+    text-align: right;
+}
+
+.js-like:hover{
+    text-transform: uppercase;
+    font-weight: bold;
+    border-bottom: 3px solid lightpink;
+    color: #000000;
+    text-decoration: none;
+    margin: 6px;
+    font-size: 15px;
+    text-align: right;
 }

@@ -36,7 +36,7 @@ class User extends BaseUser
     private $activities;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Likes", mappedBy="User")
+     * @ORM\OneToMany(targetEntity="App\Entity\Likes", mappedBy="user")
      */
     private $likes;
 
